@@ -7,3 +7,13 @@ body {
       padding-top: 56px;
     }
   }
+
+  .navbar{
+    height: 3vw;
+    margin: .2em;
+  }
+
+  .nav-link{
+
+    font-size:0.5em;
+  }

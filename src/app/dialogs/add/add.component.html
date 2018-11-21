@@ -1,0 +1,60 @@
+<div class="container">
+  <h3 mat-dialog-title>Add new Detail</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" [formGroup]="formControl">
+
+    <div class="form">
+      
+    </div>
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select formControlName="level" placeholder="Class">
+          <mat-option *ngFor="let x of Classes" [value]="x">
+            {{ x }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select formControlName="board" placeholder="Board">
+          <mat-option *ngFor="let x of Boards" [value]="x">
+            {{ x }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Institute Name" formControlName="institue" required>
+        <mat-error *ngFor="let validation of validation_messages.institute">
+          <mat-error class="error-message" *ngIf="formControl.get('institute').hasError(validation.type) && (formControl.get('institute').dirty || formControl.get('institute').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="% Scored" formControlName="marks" name="marks_at">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Passed at" formControl="passed" name="passed_at">
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

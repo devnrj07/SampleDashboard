@@ -1,0 +1,10 @@
+<mat-list dense>
+  <mat-list-item *ngFor="let job of jobs">
+    <h4 matLine> {{job.id}} </h4>
+    <p matLine> {{job.Company}} </p>
+    <p matLine class="position"> {{job.position}} </p>
+    <p matLine >{{job.vaccany}}</p>
+    <p matLine href="#">More Details</p>
+    <button matLine mat-stroked-button color="accent">Apply</button>
+  </mat-list-item>
+</mat-list>
