@@ -9,17 +9,21 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule,
   MatButtonModule, MatStepperModule, MatFormFieldModule, MatTableModule,
   MatSortModule, MatToolbarModule, MatPaginatorModule, MatDialogModule,
   MatSelectModule, MatChipsModule, MatAutocompleteModule, MatExpansionModule,
-  MatListModule } from '@angular/material';
+  MatListModule, 
+  MatInputModule} from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ResumeComponent } from './resume/resume.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { UiModule } from './ui/ui.module';
+
 import { AddComponent } from './dialogs/add/add.component';
 import { EditComponent } from './dialogs/edit/edit.component';
 import { DeleteComponent } from './dialogs/delete/delete.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SeekerServiceService } from './Services/seeker-service.service';
 import { JobComponent } from './job/job.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { ContentComponent } from './layout/content/content.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { JobComponent } from './job/job.component';
     AddComponent,
     EditComponent,
     DeleteComponent,
-    JobComponent
+    JobComponent,
+    HeaderComponent,
+    FooterComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,7 @@ import { JobComponent } from './job/job.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     FormsModule,
-    UiModule,
+    MatInputModule,
     MatStepperModule,
     MatTableModule,
     MatSortModule,

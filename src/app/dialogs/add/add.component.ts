@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Education } from 'src/app/models/education';
 import { FormControl, Validators } from '@angular/forms';
 import { SeekerServiceService } from 'src/app/Services/seeker-service.service';
+import { Issue } from 'src/app/models/Issue';
 
 @Component({
   selector: 'app-add',
@@ -10,10 +11,11 @@ import { SeekerServiceService } from 'src/app/Services/seeker-service.service';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  formControl: any;
 
 
   constructor(public dialogRef: MatDialogRef<AddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Education, public dataService: SeekerServiceService) { }
+    @Inject(MAT_DIALOG_DATA) public data: Issue, public dataService: SeekerServiceService) { }
 
 
 
@@ -29,15 +31,20 @@ export class AddComponent implements OnInit {
 
 
 
+
+
+
   ngOnInit() {
   }
 
   getErrorMessage() {
-
+    return this.formControl.hasError('required') ? 'Required field' :
+      this.formControl.hasError('email') ? 'Not a valid email' :
+        '';
   }
 
   submit() {
-    // emppty stuff
+  // emppty stuff
   }
 
   onNoClick(): void {
@@ -45,7 +52,7 @@ export class AddComponent implements OnInit {
   }
 
   public confirmAdd(): void {
-    this.dataService.addData(this.data);
+    this.dataService.addIssue(this.data);
   }
 
 }
