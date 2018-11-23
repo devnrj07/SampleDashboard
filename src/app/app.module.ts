@@ -68,6 +68,11 @@ import { ContentComponent } from './layout/content/content.component';
 
   ],
   providers: [SeekerServiceService],
+  entryComponents: [
+    AddComponent,
+    EditComponent,
+    DeleteComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

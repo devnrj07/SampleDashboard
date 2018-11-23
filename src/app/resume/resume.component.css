@@ -6,3 +6,7 @@
 width:25em;
 
 }
+
+mat-horizontal-stepper{
+    margin: 5em;
+}
