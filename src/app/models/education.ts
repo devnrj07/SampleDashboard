@@ -4,5 +4,6 @@ export class Education {
     board: string;
     instituteName: string;
     marks: string;
-    passed: string;
+    started_at: string;
+    ended_at: string;
 }

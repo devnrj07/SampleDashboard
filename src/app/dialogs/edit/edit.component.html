@@ -1,7 +1,7 @@
 <div class="container">
   <h3 mat-dialog-title>Issue id: {{data.id}}</h3>
 
-  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+  <form class="mat-dialog-content" (ngSubmit)="submit()" #formControl="ngForm">
 
     <div class="form">
       <mat-form-field color="accent">
@@ -13,35 +13,50 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Title" [(ngModel)]="data.title" name="title" required ></textarea>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-select [(ngModel)]="data.level" placeholder="Degree">
+          <mat-option *ngFor="let degree of Classes" [value]="degree">
+            {{ degree }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="State" [(ngModel)]="data.state" name="state" maxlength="10" required >
+        <input matInput #inputstate class="form-control" placeholder="Board" [(ngModel)]="data.board" name="state" maxlength="10" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
       </mat-form-field>
     </div>
 
     <div class="form">
-        <mat-form-field color="accent">
-          <input matInput placeholder="Url" [(ngModel)]="data.url" name="url">
-        </mat-form-field>
+      <mat-form-field color="accent">
+        <input matInput placeholder="Institute Name" [(ngModel)]="data.instituteName" name="institute name">
+      </mat-form-field>
     </div>
 
     <div class="form">
+        <mat-form-field color="accent">
+      <input matInput placeholder="Score" type="number" [(ngModel)]="data.marks">
+      <mat-hint align="start">% or cgpa </mat-hint>
+      
+      </mat-form-field>
+
+
+    <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Created at" [(ngModel)]="data.created_at" name="created_at">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Started_at" [(ngModel)]="data.started_at" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"> <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Updated at" [(ngModel)]="data.updated_at" name="updated_at">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Ended_at" [(ngModel)]="data.ended_at" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"> <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
 
@@ -49,5 +64,7 @@
       <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
       <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
     </div>
+   
+  </div>
   </form>
-</div>
+  

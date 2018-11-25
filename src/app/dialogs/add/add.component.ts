@@ -11,17 +11,17 @@ import { Issue } from 'src/app/models/Issue';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  formControl: any;
+  formControl: FormControl;
 
 
   constructor(public dialogRef: MatDialogRef<AddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Issue, public dataService: SeekerServiceService) { }
+    @Inject(MAT_DIALOG_DATA) public data: Education, public dataService: SeekerServiceService) { }
 
 
 
 
   Classes = ['Xth', 'XIIth', 'UG', 'PG', 'Diploma'];
-  Boards = ['CBSE', 'STATE', 'ICSE', 'B.Tech', 'B.A', 'M.Tech', 'M.S.'];
+
   validation_messages = {
     'institute': [
       { type: 'pattern', message: 'No special characters are allowed' },
@@ -29,7 +29,8 @@ export class AddComponent implements OnInit {
     ]
   };
 
-
+  minDate = new Date(2000, 0, 1);
+  maxDate = Date.now();
 
 
 
@@ -38,13 +39,11 @@ export class AddComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
-        '';
+    
   }
 
   submit() {
-  // emppty stuff
+    // empty stuff
   }
 
   onNoClick(): void {

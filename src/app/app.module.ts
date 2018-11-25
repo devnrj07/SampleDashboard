@@ -9,8 +9,10 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule,
   MatButtonModule, MatStepperModule, MatFormFieldModule, MatTableModule,
   MatSortModule, MatToolbarModule, MatPaginatorModule, MatDialogModule,
   MatSelectModule, MatChipsModule, MatAutocompleteModule, MatExpansionModule,
-  MatListModule, 
-  MatInputModule} from '@angular/material';
+  MatListModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule} from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ResumeComponent } from './resume/resume.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -64,10 +66,12 @@ import { ContentComponent } from './layout/content/content.component';
     MatChipsModule,
     MatAutocompleteModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 
   ],
-  providers: [SeekerServiceService],
+  providers: [SeekerServiceService, MatDatepickerModule],
   entryComponents: [
     AddComponent,
     EditComponent,

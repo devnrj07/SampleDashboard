@@ -12,7 +12,7 @@ import { Observable, fromEvent, BehaviorSubject, merge } from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { startWith, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Issue } from '../models/Issue';
+
 
 @Component({
   selector: 'app-resume',
@@ -29,7 +29,7 @@ export class ResumeComponent implements OnInit {
 
 
   // Crud table
-  displayedColumns = ['id', 'title', 'state', 'url', 'created_at', 'updated_at', 'actions'];
+  displayedColumns = ['id', 'level', 'board', 'institueName', 'marks', 'started_at', 'ended_at', 'actions'];
   exampleDatabase: SeekerServiceService| null;
   dataSource: ExampleDataSource | null;
   index: number;
@@ -125,13 +125,13 @@ allSkills: string[] = ['A', 'B', 'C', 'D', 'E'];
     return this.allSkills.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 
-////////// Crud table
+//////////////////////////////////////// Crud table /////////////////////////////////
 
   refresh() {
     this.loadData();
   }
 
-  addNew(issue: Issue) {
+  addNew(issue: Education) {
     const dialogRef = this.dialog.open(AddComponent, {
       data: {issue: issue }
     });
@@ -145,13 +145,13 @@ allSkills: string[] = ['A', 'B', 'C', 'D', 'E'];
       }
     });
   }
-  startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
+  startEdit(i: number, id: number, level: string, board: string,
+    instituteName: string, marks: string, started_at: string, ended_at: string) {
     this.id = id;
-    // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(EditComponent, {
-      data: {id: id, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at}
+      data: {id: id, level: level, board: board, instituteName: instituteName, marks: marks, started_at: started_at, ended_at: ended_at}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -166,11 +166,12 @@ allSkills: string[] = ['A', 'B', 'C', 'D', 'E'];
     });
   }
 
-  deleteItem(i: number, id: number, title: string, state: string, url: string) {
+  deleteItem(i: number, id: number, level: string, board: string,
+    instituteName: string, marks: string, started_at: string, ended_at: string) {
     this.index = i;
     this.id = id;
     const dialogRef = this.dialog.open(DeleteComponent, {
-      data: {id: id, title: title, state: state, url: url}
+      data: {id: id, level: level, board: board, instituteName: instituteName, marks: marks, started_at: started_at, ended_at: ended_at}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -207,7 +208,7 @@ allSkills: string[] = ['A', 'B', 'C', 'D', 'E'];
   }
 }
 
-export class ExampleDataSource extends DataSource<Issue> {
+export class ExampleDataSource extends DataSource<Education> {
   _filterChange = new BehaviorSubject('');
 
   get filter(): string {
@@ -218,8 +219,8 @@ export class ExampleDataSource extends DataSource<Issue> {
     this._filterChange.next(filter);
   }
 
-  filteredData: Issue[] = [];
-  renderedData: Issue[] = [];
+  filteredData: Education[] = [];
+  renderedData: Education[] = [];
 
   constructor(public _exampleDatabase: SeekerServiceService,
               public _paginator: MatPaginator,
@@ -230,7 +231,7 @@ export class ExampleDataSource extends DataSource<Issue> {
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Issue[]> {
+  connect(): Observable<Education[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
@@ -244,8 +245,8 @@ export class ExampleDataSource extends DataSource<Issue> {
 
     return merge(...displayDataChanges).pipe(map( () => {
         // Filter data
-        this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-          const searchStr = (issue.id + issue.title + issue.url + issue.created_at).toLowerCase();
+        this.filteredData = this._exampleDatabase.data.slice().filter((issue: Education) => {
+          const searchStr = (issue.id + issue.level + issue.board + issue.started_at).toLowerCase();
           return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
         });
 
@@ -264,7 +265,7 @@ export class ExampleDataSource extends DataSource<Issue> {
 
 
   /** Returns a sorted copy of the database data. */
-  sortData(data: Issue[]): Issue[] {
+  sortData(data: Education[]): Education[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -275,11 +276,12 @@ export class ExampleDataSource extends DataSource<Issue> {
 
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
-        case 'state': [propertyA, propertyB] = [a.state, b.state]; break;
-        case 'url': [propertyA, propertyB] = [a.url, b.url]; break;
-        case 'created_at': [propertyA, propertyB] = [a.created_at, b.created_at]; break;
-        case 'updated_at': [propertyA, propertyB] = [a.updated_at, b.updated_at]; break;
+        case 'level': [propertyA, propertyB] = [a.level, b.level]; break;
+        case 'board': [propertyA, propertyB] = [a.board, b.board]; break;
+        case 'instituteName': [propertyA, propertyB] = [a.instituteName, b.instituteName]; break;
+        case 'marks': [propertyA, propertyB] = [a.marks, b.marks]; break;
+        case 'started_at': [propertyA, propertyB] = [a.started_at, b.started_at]; break;
+        case 'ended_at': [propertyA, propertyB] = [a.ended_at, b.ended_at]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
